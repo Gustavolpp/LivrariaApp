@@ -64,5 +64,12 @@ namespace LivrariaApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Delete(long id)
+        {
+            await _bookService.Delete(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }
