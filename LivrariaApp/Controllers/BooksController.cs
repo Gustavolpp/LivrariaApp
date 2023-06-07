@@ -1,4 +1,5 @@
 ﻿using LivrariaApp.Domain.Interfaces.Services;
+using LivrariaApp.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivrariaApp.Controllers
@@ -29,6 +30,19 @@ namespace LivrariaApp.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Book model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _bookService.Create(model);
+
+            return RedirectToAction("Index");
         }
     }
 }
