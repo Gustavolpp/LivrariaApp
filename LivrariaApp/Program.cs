@@ -1,4 +1,8 @@
+using LivrariaApp.Application.Services;
+using LivrariaApp.Domain.Interfaces.Repositories;
+using LivrariaApp.Domain.Interfaces.Services;
 using LivrariaApp.Infrastructure.Data;
+using LivrariaApp.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +15,9 @@ builder.Services
     .AddDbContext<MySqlDbContext>(
         options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
     );
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
