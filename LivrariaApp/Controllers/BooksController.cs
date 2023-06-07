@@ -44,5 +44,25 @@ namespace LivrariaApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(long id)
+        {
+            var model = await _bookService.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Book model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _bookService.Update(model);
+
+            return RedirectToAction("Index");
+        }
     }
 }
