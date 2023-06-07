@@ -17,5 +17,12 @@ namespace LivrariaApp.Controllers
 
             return View(books);
         }
+
+        public async Task<IActionResult> Details(long id)
+        {
+            var model = await _bookService.GetById(id);
+
+            return View(model);
+        }
     }
 }
