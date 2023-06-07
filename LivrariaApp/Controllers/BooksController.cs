@@ -24,5 +24,11 @@ namespace LivrariaApp.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
